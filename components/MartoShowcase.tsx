@@ -5,6 +5,7 @@ import {
   MapPinned,
   WalletCards,
 } from "lucide-react";
+import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 const martoFeatures = [
@@ -82,33 +83,19 @@ export function MartoShowcase() {
         </ScrollReveal>
 
         <ScrollReveal className="mx-auto w-full max-w-md lg:max-w-none" delay={120}>
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm rounded-[3rem] border border-white/20 bg-white/[0.06] p-3 shadow-[0_2rem_6rem_rgb(0_191_255_/_0.16)]">
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[2.35rem] border border-dashed border-brand/55 bg-[#061116] p-7 sm:p-9">
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-bold tracking-[-0.03em]">Marto</p>
-                <span className="rounded-full border border-brand/35 bg-brand/10 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-brand">
-                  Visual pending
-                </span>
-              </div>
-
-              <div className="my-auto">
-                <div className="relative mx-auto flex aspect-square max-w-56 items-center justify-center rounded-full border border-brand/30">
-                  <div className="absolute inset-5 rounded-full border border-white/10" />
-                  <CarFront className="text-brand" size={70} strokeWidth={1.1} aria-hidden="true" />
-                </div>
-                <p className="mt-9 text-center text-3xl font-semibold leading-tight tracking-[-0.04em]">
-                  Your Ride.<br />Your Way.
-                </p>
-                <p className="mt-4 text-center text-sm leading-6 text-white/50">
-                  Product imagery will appear here when the official Marto asset is supplied.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 text-center text-xs font-bold uppercase tracking-[0.15em] text-white/55">
-                <span className="border-t border-white/15 pt-4">Ride</span>
-                <span className="border-t border-white/15 pt-4">Rent</span>
-              </div>
-            </div>
+          <div className="relative mx-auto w-full max-w-[28rem]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[12%] bottom-[2%] h-[82%] rounded-full bg-brand/20 blur-3xl"
+            />
+            <Image
+              src="/screen-rider-home.png"
+              alt="Marto rider app home screen showing ride and car-rental options in Freetown"
+              width={1294}
+              height={2657}
+              sizes="(max-width: 1023px) 90vw, 448px"
+              className="relative h-auto w-full drop-shadow-[0_2.5rem_4rem_rgb(0_0_0_/_0.55)]"
+            />
           </div>
         </ScrollReveal>
       </div>

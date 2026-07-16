@@ -137,8 +137,13 @@ Single-page site with anchor navigation:
 
 **Goal:** shippable static site, deployed to Vercel.
 
-1. `npm run build` → confirm static `out/` directory generated cleanly.
-2. `npx serve out` locally to smoke-test the actual static export (not just `next dev`) — click every nav link, test mobile menu, confirm Marto CTA.
+**Status (2026-07-16):** Local release gate complete. `npm run lint` and
+`npm run build` pass, `out/` is generated, and the static export has been
+smoke-tested at desktop and mobile sizes with working anchor navigation and no
+browser console errors. GitHub, Vercel, custom-domain, and DNS steps remain.
+
+1. [x] `npm run build` → confirm static `out/` directory generated cleanly.
+2. [x] `npx serve out` locally to smoke-test the actual static export (not just `next dev`) — click every nav link, test mobile menu, confirm Marto CTA.
 3. Push repo to GitHub (new repo, per hosting decision).
 4. Connect repo to a new Vercel project; confirm the static export builds and deploys correctly on Vercel.
 5. Add `peektower.com` as a custom domain in the Vercel project (this requires the user to update DNS records at their domain registrar to point at Vercel instead of GitHub Pages — a manual, account-level step for the user, not something executed here).
@@ -150,6 +155,6 @@ Single-page site with anchor navigation:
 ## Open Items for User (block Phases 4–5 from being "final")
 
 - **Founder titles** — confirm exact public-facing titles for all 4 founders, and supply headshots if desired (otherwise initials-avatars stay as the permanent look).
-- **Marto visual asset** — a logo/screenshot/mockup image for the showcase section.
+- **Marto visual asset** — supplied and integrated as `public/screen-rider-home.png`.
 - **Contact details** — real business email and WhatsApp/phone number for the Contact section links.
 - **Social links** — actual social media URLs for Nav/Footer/Contact (none were found in the reviewed docs).
