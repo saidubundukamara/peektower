@@ -18,9 +18,9 @@ export function Footer() {
             <Image
               src="/logo/peektower-white.png"
               alt="PeekTower"
-              width={1920}
-              height={1080}
-              className="h-14 w-auto object-contain object-left"
+              width={1343}
+              height={378}
+              className="h-10 w-auto object-contain object-left"
             />
           </a>
           <p className="mt-4 max-w-md text-sm leading-6 text-white/60">

@@ -53,10 +53,10 @@ export function Nav() {
           <Image
             src={hasLightSurface ? "/logo/peektower-black.png" : "/logo/peektower-white.png"}
             alt="PeekTower"
-            width={1920}
-            height={1080}
+            width={1343}
+            height={378}
             priority
-            className="h-12 w-auto object-contain object-left sm:h-14"
+            className="h-9 w-auto object-contain object-left sm:h-10"
           />
         </a>
 
