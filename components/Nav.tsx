@@ -2,12 +2,15 @@
 
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { navItems } from "@/data/nav";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const sectionIds = useMemo(() => navItems.map((item) => item.href.slice(1)), []);
+  const activeId = useScrollSpy(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 24);
@@ -58,16 +61,23 @@ export function Nav() {
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="rounded-sm text-xs font-bold uppercase tracking-heading transition-colors hover:text-brand-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-text"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeId === item.href.slice(1);
+
+            return (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`rounded-sm text-xs font-bold uppercase tracking-heading transition-colors hover:text-brand-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-text ${
+                    isActive ? "text-brand-text" : ""
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <button
@@ -91,17 +101,24 @@ export function Nav() {
         }`}
       >
         <ul className="mx-auto w-full max-w-6xl px-6 py-4 sm:px-10">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="block rounded-sm border-b border-black/10 py-4 text-sm font-bold uppercase tracking-heading text-foreground transition-colors last:border-0 hover:text-brand-text focus-visible:outline-2 focus-visible:outline-brand-text"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeId === item.href.slice(1);
+
+            return (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`block rounded-sm border-b border-black/10 py-4 text-sm font-bold uppercase tracking-heading transition-colors last:border-0 hover:text-brand-text focus-visible:outline-2 focus-visible:outline-brand-text ${
+                    isActive ? "text-brand-text" : "text-foreground"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </header>
