@@ -29,14 +29,14 @@ const fragment = /* glsl */ `
     vec2 pointer = (uPointer - .5) * vec2(.7, .45);
     uv -= pointer;
 
-    float t = uTime * .22;
+    float t = uTime * .26;
     float field = wave(uv * .9, t);
     field += .55 * wave((uv + vec2(field * .09)) * 1.7, -t * 1.25);
 
     float ribbon = smoothstep(.32, 0.0, abs(field) * .18 + abs(uv.y + .08));
     float halo = .11 / max(.08, length(uv * vec2(.72, 1.2)));
     float edge = smoothstep(1.45, .15, length(uv));
-    float alpha = clamp((ribbon * .27 + halo * .32) * edge, 0.0, .38);
+    float alpha = clamp((ribbon * .34 + halo * .40) * edge, 0.0, .52);
 
     gl_FragColor = vec4(uColor * (ribbon + halo * 1.8), alpha);
   }
@@ -55,6 +55,8 @@ export function PlasmaBackground() {
     gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
 
+    const brandColor = getComputedStyle(document.documentElement).getPropertyValue("--brand").trim() || "#00bfff";
+
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
       vertex,
@@ -64,7 +66,7 @@ export function PlasmaBackground() {
         uTime: { value: 0 },
         uResolution: { value: [1, 1] },
         uPointer: { value: [0.72, 0.3] },
-        uColor: { value: new Color("#00bfff") },
+        uColor: { value: new Color(brandColor) },
       },
     });
     const mesh = new Mesh(gl, { geometry, program });
@@ -87,8 +89,8 @@ export function PlasmaBackground() {
     };
 
     const render = (time: number) => {
-      currentX += (targetX - currentX) * 0.035;
-      currentY += (targetY - currentY) * 0.035;
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
       program.uniforms.uPointer.value = [currentX, currentY];
       program.uniforms.uTime.value = reducedMotion.matches ? 0 : time * 0.001;
       renderer.render({ scene: mesh });

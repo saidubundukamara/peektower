@@ -4,7 +4,7 @@ import { PlasmaBackground } from "@/components/PlasmaBackground";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-screen items-end overflow-hidden bg-black text-white">
+    <section className="relative isolate flex min-h-screen items-end overflow-hidden bg-brand-ink text-white">
       <div aria-hidden="true" className="hero-grid absolute inset-0 -z-20 opacity-35" />
       <PlasmaBackground />
       <div
@@ -36,14 +36,18 @@ export function Hero() {
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
               href={siteContent.primaryCta.href}
-              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-bold text-brand-ink transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-bold text-brand-ink transition-[background-color,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-white hover:shadow-2xl hover:shadow-brand/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand active:scale-[0.98]"
             >
               {siteContent.primaryCta.label}
-              <ArrowDownRight size={18} aria-hidden="true" />
+              <ArrowDownRight
+                size={18}
+                aria-hidden="true"
+                className="transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] group-hover:translate-x-0.5 group-hover:translate-y-0.5"
+              />
             </a>
             <a
               href={siteContent.secondaryCta.href}
-              className="inline-flex min-h-12 items-center justify-center rounded-sm border border-white/35 px-6 py-3 text-sm font-bold text-white transition-colors hover:border-white hover:bg-white hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              className="group inline-flex min-h-12 items-center justify-center rounded-sm border border-white/35 px-6 py-3 text-sm font-bold text-white transition-[background-color,color,border-color,transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:scale-[1.03] hover:border-white hover:bg-white hover:text-black hover:shadow-xl hover:shadow-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand active:scale-[0.98]"
             >
               {siteContent.secondaryCta.label}
             </a>
