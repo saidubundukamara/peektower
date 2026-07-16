@@ -44,7 +44,7 @@ export function Nav() {
         <a
           href="#top"
           aria-label="PeekTower home"
-          className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+          className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-text"
           onClick={() => setIsMenuOpen(false)}
         >
           <Image
@@ -62,7 +62,7 @@ export function Nav() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="rounded-sm text-xs font-bold uppercase tracking-heading transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+                className="rounded-sm text-xs font-bold uppercase tracking-heading transition-colors hover:text-brand-text focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-text"
               >
                 {item.label}
               </a>
@@ -75,7 +75,7 @@ export function Nav() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-sm transition-colors hover:text-brand-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-text md:hidden"
           onClick={() => setIsMenuOpen((open) => !open)}
         >
           {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -93,7 +93,7 @@ export function Nav() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="block rounded-sm border-b border-black/10 py-4 text-sm font-bold uppercase tracking-heading text-foreground transition-colors last:border-0 hover:text-brand focus-visible:outline-2 focus-visible:outline-brand"
+                className="block rounded-sm border-b border-black/10 py-4 text-sm font-bold uppercase tracking-heading text-foreground transition-colors last:border-0 hover:text-brand-text focus-visible:outline-2 focus-visible:outline-brand-text"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
