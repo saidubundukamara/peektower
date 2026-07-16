@@ -19,8 +19,8 @@ export function About() {
               We turn useful ideas into clear, dependable digital products.
             </p>
             <p className="mt-5 text-base leading-7 text-muted sm:text-lg sm:leading-8">
-              Our work spans web development, mobile applications, and product design. Marto—our
-              ride-hailing and car-rental platform—is the first product in that journey.
+              Our work spans web development, mobile applications, and product design—from Marto,
+              our mobility platform, to OpenJustice, open-source infrastructure for public safety.
             </p>
           </div>
         </ScrollReveal>

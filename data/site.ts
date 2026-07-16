@@ -3,9 +3,9 @@ export const siteContent = {
   location: "Freetown, Sierra Leone",
   tagline: "Building practical digital products from Sierra Leone.",
   positioning:
-    "PeekTower turns useful ideas into thoughtful web and mobile products—starting with Marto, a simpler way to ride and rent in Freetown.",
+    "PeekTower turns useful ideas into thoughtful digital products—from everyday mobility with Marto to public justice infrastructure with OpenJustice.",
   primaryCta: {
-    label: "See Marto",
+    label: "See our work",
     href: "#marto",
   },
   secondaryCta: {
