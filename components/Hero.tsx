@@ -1,13 +1,15 @@
 import { ArrowDownRight } from "lucide-react";
 import { siteContent } from "@/data/site";
+import { PlasmaBackground } from "@/components/PlasmaBackground";
 
 export function Hero() {
   return (
     <section className="relative isolate flex min-h-screen items-end overflow-hidden bg-black text-white">
       <div aria-hidden="true" className="hero-grid absolute inset-0 -z-20 opacity-35" />
+      <PlasmaBackground />
       <div
         aria-hidden="true"
-        className="absolute -right-28 top-24 -z-10 h-72 w-72 rounded-full border border-brand/35 sm:right-8 sm:h-[28rem] sm:w-[28rem]"
+        className="hero-orbit absolute -right-28 top-24 -z-10 h-72 w-72 rounded-full border border-brand/35 sm:right-8 sm:h-[28rem] sm:w-[28rem]"
       />
       <div
         aria-hidden="true"
@@ -15,18 +17,18 @@ export function Hero() {
       />
 
       <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-32 sm:px-10 sm:pb-24 lg:px-12 lg:pb-20">
-        <div className="flex items-center gap-4">
+        <div className="hero-reveal hero-reveal-1 flex items-center gap-4">
           <span className="h-px w-10 bg-brand" aria-hidden="true" />
           <p className="text-xs font-bold uppercase tracking-heading text-brand">
             {siteContent.location}
           </p>
         </div>
 
-        <h1 className="mt-7 max-w-5xl text-balance text-[clamp(3.25rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
+        <h1 className="hero-reveal hero-reveal-2 mt-7 max-w-5xl text-balance text-[clamp(3.25rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
           Building practical digital products <span className="text-white/45">from Sierra Leone.</span>
         </h1>
 
-        <div className="mt-10 grid gap-8 border-t border-white/15 pt-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+        <div className="hero-reveal hero-reveal-3 mt-10 grid gap-8 border-t border-white/15 pt-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <p className="max-w-2xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
             {siteContent.positioning}
           </p>
