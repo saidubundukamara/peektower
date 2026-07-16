@@ -18,10 +18,10 @@ export function Team() {
           <p className="text-xs font-bold uppercase tracking-heading text-brand-text">Our team</p>
           <div>
             <h2 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-              Meet the people behind PeekTower.
+              The team building PeekTower.
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
-              A founding team focused on building useful technology for Sierra Leone and beyond.
+              Four founders building technology out of Freetown, for Sierra Leone first.
             </p>
           </div>
         </ScrollReveal>
@@ -32,9 +32,13 @@ export function Team() {
               <article className="flex h-full min-h-72 flex-col bg-surface p-7 sm:p-8">
                 <div
                   aria-hidden="true"
-                  className="flex h-20 w-20 items-center justify-center rounded-full border border-brand/45 bg-brand/10 text-xl font-semibold tracking-[0.08em] text-brand-text"
+                  className={`flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br p-[2px] ${
+                    index % 2 === 0 ? "from-brand to-brand-text" : "from-brand-text to-brand"
+                  }`}
                 >
-                  {getInitials(member.name)}
+                  <div className="flex h-full w-full items-center justify-center rounded-full bg-surface text-xl font-semibold tracking-[0.08em] text-brand-text">
+                    {getInitials(member.name)}
+                  </div>
                 </div>
                 <div className="mt-auto pt-14">
                   <h3 className="text-xl font-semibold leading-tight tracking-[-0.025em]">
