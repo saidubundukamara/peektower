@@ -31,8 +31,7 @@ export function Contact() {
             Have an idea worth building?
           </h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
-            Tell us what you are working on. We would be glad to explore how thoughtful software
-            can help move it forward.
+            Tell us what you&apos;re working on — we&apos;ll tell you honestly whether we can help.
           </p>
 
           <div className="mt-10 flex items-center gap-3 text-base text-foreground">
@@ -92,7 +91,7 @@ export function Contact() {
                   key={social.label}
                   title={`${social.label} link coming soon`}
                   aria-label={`${social.label} link coming soon`}
-                  className="inline-flex h-12 w-12 cursor-not-allowed items-center justify-center rounded-full border border-black/10 text-black/30"
+                  className="inline-flex h-12 w-12 cursor-not-allowed items-center justify-center rounded-full border border-dashed border-black/20 text-muted"
                 >
                   <Icon size={20} aria-hidden="true" />
                 </span>

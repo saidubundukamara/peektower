@@ -49,7 +49,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  // Matches --brand-ink in app/globals.css (Hero/Footer's bg-brand-ink).
+  // Keep in sync manually — Viewport config can't reference CSS custom properties.
+  themeColor: "#00131a",
   colorScheme: "light",
 };
 

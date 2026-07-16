@@ -7,7 +7,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-brand-ink text-white">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start lg:px-12">
         <div>
           <a
@@ -49,7 +49,10 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {socialLinks.map((label) => (
                 <li key={label}>
-                  <span className="text-sm text-white/40" title="Link coming soon">
+                  <span
+                    className="inline-flex items-center rounded-full border border-dashed border-white/20 px-3 py-1 text-xs text-white/50"
+                    title="Link coming soon"
+                  >
                     {label}
                   </span>
                 </li>
