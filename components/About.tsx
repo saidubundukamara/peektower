@@ -7,7 +7,7 @@ export function About() {
         <ScrollReveal>
           <p className="text-xs font-bold uppercase tracking-heading text-brand-text">About PeekTower</p>
           <h2 className="mt-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-            Technology shaped here, built to move people forward.
+            Technology built here, for the problems we actually have.
           </h2>
         </ScrollReveal>
 
@@ -16,11 +16,12 @@ export function About() {
             <p className="text-xs font-bold uppercase tracking-heading text-brand-text">Built in Freetown</p>
             <p className="mt-5 text-base leading-7 text-muted sm:text-lg sm:leading-8">
               PeekTower Company Limited is a technology company based in Freetown, Sierra Leone.
-              We turn useful ideas into clear, dependable digital products.
+              We build digital products that are simple to use and easy to trust.
             </p>
             <p className="mt-5 text-base leading-7 text-muted sm:text-lg sm:leading-8">
-              Our work spans web development, mobile applications, and product design—from Marto,
-              our mobility platform, to OpenJustice, open-source infrastructure for public safety.
+              We work across web, mobile, and product design. Two of those products are already
+              live: Marto gets people around Freetown, and OpenJustice helps justice systems keep
+              working when the internet doesn&apos;t.
             </p>
           </div>
         </ScrollReveal>

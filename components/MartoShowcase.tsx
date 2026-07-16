@@ -53,8 +53,8 @@ export function MartoShowcase() {
             Your Ride. <span className="text-white/45">Your Way.</span> Marto.
           </h2>
           <p className="mt-7 max-w-xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
-            One mobility app for getting around Freetown—whether you need a driver today or a car
-            for longer. Marto makes each step simple, clear, and easy to follow.
+            One app for getting around Freetown — book a driver for today or a car for longer.
+            Every step is built to be obvious, not clever.
           </p>
 
           <ul className="mt-10 grid gap-px overflow-hidden rounded-sm border border-white/15 bg-white/15 sm:grid-cols-2">

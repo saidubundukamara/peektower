@@ -9,19 +9,19 @@ export type Service = {
 export const services = [
   {
     title: "Web Development",
-    description: "Fast, accessible websites and web applications built around real business goals.",
+    description: "Fast, accessible websites and web apps, built to do a specific job well.",
     icon: Globe2,
   },
   {
     title: "Mobile App Development",
     description:
-      "Thoughtful mobile experiences designed for the people, devices, and conditions they serve.",
+      "Mobile apps built for the phones people actually have and the networks they actually run on.",
     icon: Smartphone,
   },
   {
     title: "Software & Product Design",
     description:
-      "From product strategy and user flows to interfaces and prototypes, we shape ideas into products ready to build.",
+      "We map out strategy, user flows, and interface details until an idea is specific enough to build.",
     icon: PanelsTopLeft,
   },
 ] satisfies readonly Service[];

@@ -8,7 +8,7 @@ export function Services() {
         <ScrollReveal className="grid gap-6 md:grid-cols-[0.7fr_1.3fr] md:items-end">
           <p className="text-xs font-bold uppercase tracking-heading text-brand-text">What we do</p>
           <h2 className="max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl">
-            Digital capability, from first idea to finished product.
+            Software, from first sketch to shipped product.
           </h2>
         </ScrollReveal>
 
