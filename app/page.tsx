@@ -4,7 +4,6 @@ import { Hero } from "@/components/Hero";
 import { MartoShowcase } from "@/components/MartoShowcase";
 import { OpenJusticeShowcase } from "@/components/OpenJusticeShowcase";
 import { Services } from "@/components/Services";
-import { Team } from "@/components/Team";
 
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
       <Services />
       <MartoShowcase />
       <OpenJusticeShowcase />
-      <Team />
       <Contact />
     </main>
   );
