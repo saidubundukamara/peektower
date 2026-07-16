@@ -11,7 +11,7 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start lg:px-12">
         <div>
           <a
-            href="#top"
+            href="#main-content"
             aria-label="PeekTower home"
             className="inline-block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
           >
@@ -34,7 +34,10 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a className="text-sm text-white/70 transition-colors hover:text-white" href={item.href}>
+                  <a
+                    className="rounded-sm text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+                    href={item.href}
+                  >
                     {item.label}
                   </a>
                 </li>

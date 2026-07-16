@@ -37,6 +37,15 @@ body {
   font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
 }
 
+::selection {
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+:focus-visible {
+  scroll-margin-block: 6rem;
+}
+
 a {
   text-underline-offset: 0.18em;
 }
@@ -55,6 +64,15 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
   html {
     scroll-behavior: auto;
   }

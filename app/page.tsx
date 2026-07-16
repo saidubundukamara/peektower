@@ -7,7 +7,7 @@ import { Team } from "@/components/Team";
 
 export default function Home() {
   return (
-    <main id="top">
+    <main id="main-content" tabIndex={-1}>
       <Hero />
       <About />
       <Services />

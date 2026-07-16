@@ -61,6 +61,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} h-full antialiased`}>
       <body className="min-h-full bg-background text-foreground">
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-sm bg-brand px-4 py-3 text-sm font-bold text-brand-ink shadow-lg transition-transform focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
         <Nav />
         {children}
         <Footer />

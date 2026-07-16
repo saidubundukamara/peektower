@@ -42,7 +42,7 @@ export function Nav() {
         className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 sm:px-10 lg:px-12"
       >
         <a
-          href="#top"
+          href="#main-content"
           aria-label="PeekTower home"
           className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-text"
           onClick={() => setIsMenuOpen(false)}
@@ -84,6 +84,8 @@ export function Nav() {
 
       <div
         id="mobile-navigation"
+        aria-hidden={!isMenuOpen}
+        inert={!isMenuOpen}
         className={`overflow-hidden border-t border-black/10 bg-white transition-[max-height,opacity] duration-300 md:hidden ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 border-transparent opacity-0"
         }`}
