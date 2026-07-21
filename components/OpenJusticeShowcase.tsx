@@ -1,6 +1,9 @@
+"use client";
+
 import { ArrowUpRight, CloudOff, Code2, Landmark, RadioTower } from "lucide-react";
+import { motion } from "motion/react";
 import Image from "next/image";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { Parallax, Reveal, RevealGroup, staggerItem } from "@/components/ui/motion";
 
 const openJusticeFeatures = [
   {
@@ -20,79 +23,106 @@ const openJusticeFeatures = [
   },
 ] as const;
 
+const listContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+};
+
 export function OpenJusticeShowcase() {
   return (
     <section id="openjustice" className="relative overflow-hidden bg-oj-surface text-oj-ink">
-      <div
+      <Parallax
         aria-hidden="true"
+        distance={-60}
         className="absolute -right-32 -top-32 h-[34rem] w-[34rem] rounded-full border border-oj-accent/20"
       />
-      <div
+      <Parallax
         aria-hidden="true"
+        distance={70}
         className="absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-oj-accent/10 blur-3xl"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-16 px-6 py-24 sm:px-10 sm:py-32 lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-20 lg:px-12 lg:py-40">
-        <ScrollReveal className="order-2 lg:order-1">
-          <div className="relative rounded-2xl bg-oj-ink p-2 shadow-[0_2rem_5rem_rgb(16_37_31_/_0.2)] sm:p-3">
-            <div className="flex items-center gap-2 px-2 pb-3 pt-1" aria-hidden="true">
-              <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-              <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-              <span className="ml-3 h-5 flex-1 rounded-full bg-white/8" />
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
+        <Reveal className="order-2 lg:order-1">
+          <Parallax distance={20}>
+            <div className="relative rounded-2xl bg-oj-ink p-2 shadow-[0_2rem_5rem_rgb(16_37_31_/_0.2)] sm:p-3">
+              <div className="flex items-center gap-2 px-2 pb-3 pt-1" aria-hidden="true">
+                <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+                <span className="ml-3 h-5 flex-1 rounded-full bg-white/8" />
+              </div>
+              <Image
+                src="/openjustice-dashboard.png"
+                alt="OpenJustice criminal records dashboard with case statistics and navigation"
+                width={590}
+                height={340}
+                sizes="(max-width: 1023px) 100vw, 520px"
+                className="h-auto w-full rounded-lg"
+              />
+              <div className="absolute -bottom-5 right-5 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold shadow-xl sm:right-8">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-oj-accent opacity-50 motion-reduce:animate-none" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-oj-accent" />
+                </span>
+                Works offline
+              </div>
             </div>
-            <Image
-              src="/openjustice-dashboard.png"
-              alt="OpenJustice criminal records dashboard with case statistics and navigation"
-              width={590}
-              height={340}
-              sizes="(max-width: 1023px) 100vw, 520px"
-              className="h-auto w-full rounded-lg"
-            />
-            <div className="absolute -bottom-5 right-5 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold shadow-xl sm:right-8">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-oj-accent opacity-50 motion-reduce:animate-none" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-oj-accent" />
-              </span>
-              Works offline
-            </div>
-          </div>
-        </ScrollReveal>
+          </Parallax>
+        </Reveal>
 
-        <ScrollReveal className="order-1 lg:order-2" delay={120}>
-          <div className="flex items-center gap-4">
+        <RevealGroup className="order-1 lg:order-2">
+          <motion.div variants={staggerItem} className="flex items-center gap-4">
             <span className="h-px w-10 bg-oj-accent" aria-hidden="true" />
             <p className="text-xs font-bold uppercase tracking-heading text-oj-accent-strong">
               Digital Public Good
             </p>
-          </div>
+          </motion.div>
 
-          <h2 className="mt-7 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-7xl">
+          <motion.h2
+            variants={staggerItem}
+            className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
+          >
             OpenJustice. <span className="text-oj-ink/45">Justice records that work anywhere.</span>
-          </h2>
-          <p className="mt-7 max-w-xl text-base leading-7 text-oj-ink/65 sm:text-lg sm:leading-8">
+          </motion.h2>
+          <motion.p
+            variants={staggerItem}
+            className="mt-5 max-w-xl text-base leading-7 text-oj-ink/65 sm:text-lg sm:leading-8"
+          >
             An open-source criminal records platform for law enforcement agencies across Africa.
             It runs on weak connections, keeps working offline, and leaves each country in control
             of its own data.
-          </p>
+          </motion.p>
 
-          <ul className="mt-10 divide-y divide-oj-ink/12 border-y border-oj-ink/12">
+          <motion.ul
+            variants={listContainer}
+            className="mt-8 divide-y divide-oj-ink/12 border-y border-oj-ink/12"
+          >
             {openJusticeFeatures.map((feature) => {
               const Icon = feature.icon;
 
               return (
-                <li key={feature.title} className="grid grid-cols-[auto_1fr] gap-4 py-5">
-                  <Icon className="mt-0.5 text-oj-accent-strong" size={23} strokeWidth={1.6} aria-hidden="true" />
+                <motion.li
+                  key={feature.title}
+                  variants={staggerItem}
+                  className="group grid grid-cols-[auto_1fr] gap-4 py-3.5"
+                >
+                  <Icon
+                    className="mt-0.5 text-oj-accent-strong transition-transform duration-300 group-hover:scale-110"
+                    size={23}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
                   <div>
                     <p className="font-semibold">{feature.title}</p>
                     <p className="mt-1 text-sm leading-6 text-oj-ink/60">{feature.description}</p>
                   </div>
-                </li>
+                </motion.li>
               );
             })}
-          </ul>
+          </motion.ul>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <motion.div variants={staggerItem} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="https://crms-inky.vercel.app/"
               target="_blank"
@@ -111,8 +141,8 @@ export function OpenJusticeShowcase() {
               <Code2 size={18} aria-hidden="true" />
               View source
             </a>
-          </div>
-        </ScrollReveal>
+          </motion.div>
+        </RevealGroup>
       </div>
     </section>
   );

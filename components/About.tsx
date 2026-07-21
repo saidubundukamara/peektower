@@ -19,9 +19,9 @@ export function About() {
               We build digital products that are simple to use and easy to trust.
             </p>
             <p className="mt-5 text-base leading-7 text-muted sm:text-lg sm:leading-8">
-              We work across web, mobile, and product design. Two of those products are already
-              live: Marto gets people around Freetown, and OpenJustice helps justice systems keep
-              working when the internet doesn&apos;t.
+              We work across web, mobile, and product design. Three of those products are already
+              live: Marto gets people around Freetown, EzStaw helps merchants sell online, and
+              OpenJustice helps justice systems keep working when the internet doesn&apos;t.
             </p>
           </div>
         </ScrollReveal>
