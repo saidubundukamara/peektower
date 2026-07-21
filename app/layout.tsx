@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import { Footer } from "@/components/Footer";
+import { MotionProvider } from "@/components/ui/MotionProvider";
 import { Nav } from "@/components/Nav";
 import "./globals.css";
 
@@ -69,9 +70,11 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Nav />
-        {children}
-        <Footer />
+        <MotionProvider>
+          <Nav />
+          {children}
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

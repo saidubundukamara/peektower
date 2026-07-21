@@ -15,6 +15,12 @@
   --oj-accent: #16a36a;
   --oj-accent-strong: #08794b;
 
+  /* EzStaw product accent — intentional per-product palette, not shared brand */
+  --ez-surface: #fff8f0;
+  --ez-ink: #3d1e0a;
+  --ez-accent: #ea580c;
+  --ez-accent-strong: #c2410c;
+
   /* Shared motion primitives so entrance/scroll/hover animations use one curve */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 200ms;
@@ -34,6 +40,10 @@
   --color-oj-ink: var(--oj-ink);
   --color-oj-accent: var(--oj-accent);
   --color-oj-accent-strong: var(--oj-accent-strong);
+  --color-ez-surface: var(--ez-surface);
+  --color-ez-ink: var(--ez-ink);
+  --color-ez-accent: var(--ez-accent);
+  --color-ez-accent-strong: var(--ez-accent-strong);
   --font-sans: var(--font-manrope);
   --tracking-heading: 0.14em;
 }
