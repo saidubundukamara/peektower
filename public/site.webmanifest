@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "PeekTower Company Limited",
+    "short_name": "PeekTower",
+    "description": "A Freetown technology company building practical web and mobile products for Sierra Leone and beyond.",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +14,8 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
+    "theme_color": "#00131a",
+    "background_color": "#00131a",
+    "display": "standalone",
+    "start_url": "/"
 }

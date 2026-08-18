@@ -35,42 +35,42 @@ const listContainer = {
 
 export function EzStawShowcase() {
   return (
-    <section id="ezstaw" className="relative overflow-hidden bg-ez-surface text-ez-ink">
+    <section id="ezstaw" className="relative isolate overflow-hidden bg-ez-surface text-ez-ink">
       <Parallax
         aria-hidden="true"
         distance={70}
-        className="absolute -left-32 -top-24 h-[32rem] w-[32rem] rounded-full bg-ez-accent/10 blur-3xl"
+        className="pointer-events-none absolute -z-10 -left-32 -top-24 h-[32rem] w-[32rem] rounded-full bg-ez-accent/10 blur-3xl"
       />
       <Parallax
         aria-hidden="true"
         distance={-50}
-        className="absolute -right-24 bottom-0 h-72 w-72 rounded-full border border-ez-accent/20"
+        className="pointer-events-none absolute -z-10 -right-24 bottom-0 h-72 w-72 rounded-full border border-ez-accent/20"
       />
 
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.72fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
         <RevealGroup>
-          <motion.div variants={staggerItem} className="flex items-center gap-4">
+          <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
             <span className="h-px w-10 bg-ez-accent" aria-hidden="true" />
             <p className="text-xs font-bold uppercase tracking-heading text-ez-accent-strong">
               Commerce platform
             </p>
           </motion.div>
 
-          <motion.h2
+          <motion.h2 data-motion=""
             variants={staggerItem}
             className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
           >
             Your Store. <span className="text-ez-ink/45">Your Brand.</span> EzStaw.
           </motion.h2>
-          <motion.p
+          <motion.p data-motion=""
             variants={staggerItem}
-            className="mt-5 max-w-xl text-base leading-7 text-ez-ink/65 sm:text-lg sm:leading-8"
+            className="mt-5 max-w-xl text-base leading-7 text-ez-muted sm:text-lg sm:leading-8"
           >
             Everything a merchant needs to sell online in Sierra Leone — no design skills, no card
             required. Tell EzStaw what you sell and start taking orders the same day.
           </motion.p>
 
-          <motion.ul
+          <motion.ul data-motion=""
             variants={listContainer}
             className="mt-8 divide-y divide-ez-ink/12 border-y border-ez-ink/12"
           >
@@ -78,7 +78,7 @@ export function EzStawShowcase() {
               const Icon = feature.icon;
 
               return (
-                <motion.li
+                <motion.li data-motion=""
                   key={feature.title}
                   variants={staggerItem}
                   className="group grid grid-cols-[auto_1fr] gap-4 py-3.5"
@@ -90,15 +90,15 @@ export function EzStawShowcase() {
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold">{feature.title}</p>
-                    <p className="mt-1 text-sm leading-6 text-ez-ink/60">{feature.description}</p>
+                    <h3 className="font-semibold">{feature.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-ez-muted">{feature.description}</p>
                   </div>
                 </motion.li>
               );
             })}
           </motion.ul>
 
-          <motion.a
+          <motion.a data-motion=""
             variants={staggerItem}
             href="https://ezstaw.com/"
             target="_blank"

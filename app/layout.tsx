@@ -62,8 +62,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} h-full antialiased`}>
+    <html lang="en" className={`no-js ${manrope.variable} h-full antialiased`}>
       <body className="min-h-full bg-background text-foreground">
+        {/*
+          Runs during parse, before any [data-motion] element exists, so there is
+          no flash. If this never executes — JS disabled, or the chunk fails on a
+          slow connection — `.no-js` stays and globals.css force-reveals every
+          element whose entrance state Framer serialised as opacity:0.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.remove("no-js")`,
+          }}
+        />
         <a
           href="#main-content"
           className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-sm bg-brand px-4 py-3 text-sm font-bold text-brand-ink shadow-lg transition-transform focus:translate-y-0"

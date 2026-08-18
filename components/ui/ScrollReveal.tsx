@@ -23,7 +23,7 @@ export function ScrollReveal({ children, className = "", delay = 0 }: ScrollReve
   return (
     <div
       ref={elementRef}
-      className={`${className} transition-[opacity,transform] duration-[var(--duration-base)] ease-[var(--ease-out-expo)] motion-reduce:transform-none motion-reduce:transition-none ${
+      className={`${className} transition-[opacity,transform] duration-400 ease-out-expo motion-reduce:transform-none motion-reduce:transition-none ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
       }`}
       style={{ transitionDelay: isVisible ? `${delay}ms` : "0ms" }}

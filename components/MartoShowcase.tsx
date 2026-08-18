@@ -51,20 +51,20 @@ export function MartoShowcase() {
 
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.72fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
         <RevealGroup>
-          <motion.div variants={staggerItem} className="flex items-center gap-4">
+          <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
             <span className="h-px w-10 bg-brand" aria-hidden="true" />
             <p className="text-xs font-bold uppercase tracking-heading text-brand">
               Flagship product
             </p>
           </motion.div>
 
-          <motion.h2
+          <motion.h2 data-motion=""
             variants={staggerItem}
             className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
           >
             Your Ride. <span className="text-white/45">Your Way.</span> Marto.
           </motion.h2>
-          <motion.p
+          <motion.p data-motion=""
             variants={staggerItem}
             className="mt-5 max-w-xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8"
           >
@@ -72,7 +72,7 @@ export function MartoShowcase() {
             Every step is built to be obvious, not clever.
           </motion.p>
 
-          <motion.ul
+          <motion.ul data-motion=""
             variants={gridContainer}
             className="mt-8 grid gap-px overflow-hidden rounded-sm border border-white/15 bg-white/15 sm:grid-cols-2"
           >
@@ -80,7 +80,7 @@ export function MartoShowcase() {
               const Icon = feature.icon;
 
               return (
-                <motion.li
+                <motion.li data-motion=""
                   key={feature.title}
                   variants={staggerItem}
                   className="group bg-black/80 p-5 transition-colors duration-300 hover:bg-black/60"
@@ -91,14 +91,14 @@ export function MartoShowcase() {
                     strokeWidth={1.6}
                     aria-hidden="true"
                   />
-                  <p className="mt-5 font-semibold">{feature.title}</p>
+                  <h3 className="mt-5 font-semibold">{feature.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-white/55">{feature.description}</p>
                 </motion.li>
               );
             })}
           </motion.ul>
 
-          <motion.a
+          <motion.a data-motion=""
             variants={staggerItem}
             href="https://getmarto.com/"
             target="_blank"

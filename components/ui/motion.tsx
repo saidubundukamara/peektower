@@ -44,6 +44,7 @@ export function Reveal({ variants = revealUp, children, ...rest }: RevealProps) 
   return (
     <motion.div
       ref={elementRef}
+      data-motion=""
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={variants}
@@ -64,6 +65,7 @@ export function RevealGroup({ variants = staggerContainer, children, ...rest }: 
   return (
     <motion.div
       ref={elementRef}
+      data-motion=""
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={variants}

@@ -4,9 +4,12 @@
   --background: #ffffff;
   --foreground: #171717;
   --brand: #00bfff;
-  --brand-text: #007fa8;
+  --brand-text: #00718f;
   --brand-ink: #00131a;
   --surface: #f6f8fb;
+
+  /* Header height. Also drives scroll-padding-top so anchors clear the bar. */
+  --nav-h: 5rem;
   --muted: #5f6b7a;
 
   /* OpenJustice product accent — intentional per-product palette, not shared brand */
@@ -14,15 +17,17 @@
   --oj-ink: #10251f;
   --oj-accent: #16a36a;
   --oj-accent-strong: #08794b;
+  --oj-muted: #4a665e;
 
   /* EzStaw product accent — intentional per-product palette, not shared brand */
   --ez-surface: #fff8f0;
   --ez-ink: #3d1e0a;
   --ez-accent: #ea580c;
   --ez-accent-strong: #c2410c;
+  --ez-muted: #7a5540;
 
-  /* Shared motion primitives so entrance/scroll/hover animations use one curve */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Durations stay here for keyframe use; the easing lives in @theme (below) so
+     it also generates an `ease-out-expo` utility, and @theme emits it to :root. */
   --duration-fast: 200ms;
   --duration-base: 400ms;
   --duration-slow: 800ms;
@@ -44,8 +49,16 @@
   --color-ez-ink: var(--ez-ink);
   --color-ez-accent: var(--ez-accent);
   --color-ez-accent-strong: var(--ez-accent-strong);
+  --color-ez-muted: var(--ez-muted);
+  --color-oj-muted: var(--oj-muted);
   --font-sans: var(--font-manrope);
   --tracking-heading: 0.14em;
+}
+
+/* Non-inline so Tailwind emits --ease-out-expo to :root as well as generating
+   the `ease-out-expo` utility. Components use the utility; keyframes use var(). */
+@theme {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -54,7 +67,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: var(--nav-h);
 }
 
 body {
@@ -130,6 +143,18 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+/*
+  Framer serialises its `initial="hidden"` variant into the static HTML as an
+  inline opacity:0, so without JS the whole product section of the page renders
+  blank. The inline script in layout.tsx drops `.no-js` during parse; if it
+  never runs, this keeps the content readable. !important is required to beat
+  Framer's inline style.
+*/
+.no-js [data-motion] {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

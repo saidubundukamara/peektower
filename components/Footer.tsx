@@ -1,14 +1,31 @@
 import Image from "next/image";
 import { navItems } from "@/data/nav";
+import { socialLinks, type SocialLink } from "@/data/contact";
+import { siteContent } from "@/data/site";
 
-const socialLinks = ["LinkedIn", "Instagram", "Facebook"] as const;
+// The three product sections are consecutive on the page but only reachable
+// from the nav as one "Products" link. The footer is where the deep links live.
+const productLinks = [
+  { label: "Marto", href: "#marto" },
+  { label: "EzStaw", href: "#ezstaw" },
+  { label: "OpenJustice", href: "#openjustice" },
+] as const;
+
+const liveSocials = socialLinks.filter(
+  (social): social is SocialLink & { href: string } => social.href !== null,
+);
+
+const linkClass =
+  "rounded-sm text-sm text-white/70 transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand";
+
+// Sentence case, no tracking, no accent colour. The tracked uppercase label was
+// the site's default section device; here the column simply is a column.
+const columnLabel = "text-sm font-semibold text-white";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-brand-ink text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start lg:px-12">
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start md:gap-16 lg:px-12">
         <div>
           <a
             href="#main-content"
@@ -23,48 +40,66 @@ export function Footer() {
               className="h-10 w-auto object-contain object-left"
             />
           </a>
-          <p className="mt-4 max-w-md text-sm leading-6 text-white/60">
-            Building practical digital products from Freetown, Sierra Leone.
-          </p>
+          <p className="mt-4 max-w-md text-sm leading-6 text-white/60">{siteContent.tagline}</p>
+
+          {liveSocials.length > 0 ? (
+            <ul className="mt-6 flex flex-wrap gap-4">
+              {liveSocials.map((social) => (
+                <li key={social.label}>
+                  <a
+                    className={linkClass}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {social.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </div>
 
         <div className="grid gap-8 sm:grid-cols-2 sm:gap-14">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-heading text-brand">Explore</p>
+          <nav aria-labelledby="footer-explore">
+            <h2 id="footer-explore" className={columnLabel}>
+              Explore
+            </h2>
             <ul className="mt-4 space-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a
-                    className="rounded-sm text-sm text-white/70 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                    href={item.href}
-                  >
+                  <a className={linkClass} href={item.href}>
                     {item.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <p className="text-xs font-bold uppercase tracking-heading text-brand">Social</p>
+          </nav>
+
+          <nav aria-labelledby="footer-products">
+            <h2 id="footer-products" className={columnLabel}>
+              Products
+            </h2>
             <ul className="mt-4 space-y-3">
-              {socialLinks.map((label) => (
-                <li key={label}>
-                  <span
-                    className="inline-flex items-center rounded-full border border-dashed border-white/20 px-3 py-1 text-xs text-white/50"
-                    title="Link coming soon"
-                  >
-                    {label}
-                  </span>
+              {productLinks.map((item) => (
+                <li key={item.href}>
+                  <a className={linkClass} href={item.href}>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
       </div>
 
       <div className="border-t border-white/10">
+        {/*
+          No year. Under `output: "export"` a build-time getFullYear() freezes at
+          whenever the site was last deployed, which is worse than omitting it.
+        */}
         <p className="mx-auto w-full max-w-6xl px-6 py-6 text-xs text-white/50 sm:px-10 lg:px-12">
-          &copy; {currentYear} PeekTower Company Limited. All rights reserved.
+          &copy; PeekTower Company Limited. All rights reserved.
         </p>
       </div>
     </footer>

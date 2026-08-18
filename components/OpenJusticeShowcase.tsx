@@ -30,16 +30,16 @@ const listContainer = {
 
 export function OpenJusticeShowcase() {
   return (
-    <section id="openjustice" className="relative overflow-hidden bg-oj-surface text-oj-ink">
+    <section id="openjustice" className="relative isolate overflow-hidden bg-oj-surface text-oj-ink">
       <Parallax
         aria-hidden="true"
         distance={-60}
-        className="absolute -right-32 -top-32 h-[34rem] w-[34rem] rounded-full border border-oj-accent/20"
+        className="pointer-events-none absolute -z-10 -right-32 -top-32 h-[34rem] w-[34rem] rounded-full border border-oj-accent/20"
       />
       <Parallax
         aria-hidden="true"
         distance={70}
-        className="absolute -left-24 bottom-10 h-72 w-72 rounded-full bg-oj-accent/10 blur-3xl"
+        className="pointer-events-none absolute -z-10 -left-24 bottom-10 h-72 w-72 rounded-full bg-oj-accent/10 blur-3xl"
       />
 
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
@@ -63,7 +63,7 @@ export function OpenJusticeShowcase() {
               <div className="absolute -bottom-5 right-5 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold shadow-xl sm:right-8">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-oj-accent opacity-50 motion-reduce:animate-none" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-oj-accent" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-oj-accent-strong" />
                 </span>
                 Works offline
               </div>
@@ -72,29 +72,29 @@ export function OpenJusticeShowcase() {
         </Reveal>
 
         <RevealGroup className="order-1 lg:order-2">
-          <motion.div variants={staggerItem} className="flex items-center gap-4">
-            <span className="h-px w-10 bg-oj-accent" aria-hidden="true" />
+          <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
+            <span className="h-px w-10 bg-oj-accent-strong" aria-hidden="true" />
             <p className="text-xs font-bold uppercase tracking-heading text-oj-accent-strong">
               Digital Public Good
             </p>
           </motion.div>
 
-          <motion.h2
+          <motion.h2 data-motion=""
             variants={staggerItem}
             className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
           >
             OpenJustice. <span className="text-oj-ink/45">Justice records that work anywhere.</span>
           </motion.h2>
-          <motion.p
+          <motion.p data-motion=""
             variants={staggerItem}
-            className="mt-5 max-w-xl text-base leading-7 text-oj-ink/65 sm:text-lg sm:leading-8"
+            className="mt-5 max-w-xl text-base leading-7 text-oj-muted sm:text-lg sm:leading-8"
           >
             An open-source criminal records platform for law enforcement agencies across Africa.
             It runs on weak connections, keeps working offline, and leaves each country in control
             of its own data.
           </motion.p>
 
-          <motion.ul
+          <motion.ul data-motion=""
             variants={listContainer}
             className="mt-8 divide-y divide-oj-ink/12 border-y border-oj-ink/12"
           >
@@ -102,7 +102,7 @@ export function OpenJusticeShowcase() {
               const Icon = feature.icon;
 
               return (
-                <motion.li
+                <motion.li data-motion=""
                   key={feature.title}
                   variants={staggerItem}
                   className="group grid grid-cols-[auto_1fr] gap-4 py-3.5"
@@ -114,15 +114,15 @@ export function OpenJusticeShowcase() {
                     aria-hidden="true"
                   />
                   <div>
-                    <p className="font-semibold">{feature.title}</p>
-                    <p className="mt-1 text-sm leading-6 text-oj-ink/60">{feature.description}</p>
+                    <h3 className="font-semibold">{feature.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-oj-muted">{feature.description}</p>
                   </div>
                 </motion.li>
               );
             })}
           </motion.ul>
 
-          <motion.div variants={staggerItem} className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <motion.div data-motion="" variants={staggerItem} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="https://crms-inky.vercel.app/"
               target="_blank"
