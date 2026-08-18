@@ -1,27 +1,27 @@
-import { Globe2, PanelsTopLeft, Smartphone, type LucideIcon } from "lucide-react";
-
 export type Service = {
   title: string;
   description: string;
-  icon: LucideIcon;
+  /** What we actually shipped doing this. Keeps the list tied to real work. */
+  builtIt: string;
 };
 
 export const services = [
   {
-    title: "Web Development",
-    description: "Fast, accessible websites and web apps, built to do a specific job well.",
-    icon: Globe2,
-  },
-  {
-    title: "Mobile App Development",
+    title: "Web development",
     description:
-      "Mobile apps built for the phones people actually have and the networks they actually run on.",
-    icon: Smartphone,
+      "Fast, accessible websites and web apps, built to do a specific job well.",
+    builtIt: "EzStaw storefronts",
   },
   {
-    title: "Software & Product Design",
+    title: "Mobile app development",
+    description:
+      "Apps built for the phones people actually have and the networks they actually run on.",
+    builtIt: "Marto rider and driver apps",
+  },
+  {
+    title: "Software and product design",
     description:
       "We map out strategy, user flows, and interface details until an idea is specific enough to build.",
-    icon: PanelsTopLeft,
+    builtIt: "OpenJustice",
   },
 ] satisfies readonly Service[];

@@ -10,6 +10,14 @@
 
   /* Header height. Also drives scroll-padding-top so anchors clear the bar. */
   --nav-h: 5rem;
+
+  /* Origin of the hero signal: the tower mast tip. A length rather than a
+     percentage vertically, so the mark stays in the empty band under the nav
+     instead of sliding onto the headline on short viewports. The CSS rings use
+     these directly; the shader measures the rendered mark, so the two cannot
+     drift apart. */
+  --signal-x: 76%;
+  --signal-top: calc(var(--nav-h) + 0.5rem);
   --muted: #5f6b7a;
 
   /* OpenJustice product accent — intentional per-product palette, not shared brand */
@@ -113,8 +121,52 @@ a {
   height: 100%;
 }
 
-.hero-orbit {
-  animation: orbit-breathe 7s ease-in-out infinite;
+/* The mark the signal comes from. x=36 of the 75-wide viewBox is the mast, so
+   -48% puts the mast tip on the origin. Height is capped against the viewport
+   so it always clears the copy, which sits at the bottom of the hero. */
+.signal-tower {
+  left: var(--signal-x);
+  top: var(--signal-top);
+  height: min(30vh, 17rem);
+  transform: translateX(-48%);
+  /* The copy is bottom-anchored, so on a short, wide viewport the mark could
+     still graze it. Fading the lower bars out means it can never collide,
+     at any aspect ratio, without tuning heights per breakpoint. */
+  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+}
+
+/*
+  CSS fallback for the shader: renders on first paint with no JS, and stays put
+  on devices with no WebGL context — which on a Sierra Leone audience is a real
+  share of low-end Android, not an edge case. PlasmaBackground sets data-gl
+  only after a context succeeds.
+*/
+.signal-field {
+  position: absolute;
+  inset: 0;
+  z-index: -12;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.signal-ring {
+  position: absolute;
+  left: var(--signal-x);
+  top: var(--signal-top);
+  width: 22rem;
+  height: 22rem;
+  margin: -11rem 0 0 -11rem;
+  border: 1px solid var(--brand);
+  border-radius: 9999px;
+  opacity: 0;
+  animation: signal-out 4.2s var(--ease-out-expo) forwards;
+}
+
+.signal-ring:nth-child(2) { animation-delay: 0.5s; }
+.signal-ring:nth-child(3) { animation-delay: 1s; }
+
+.hero-plasma[data-gl="on"] ~ .signal-field {
+  display: none;
 }
 
 .hero-reveal {
@@ -135,9 +187,10 @@ a {
   to { background-position: 5rem 5rem; }
 }
 
-@keyframes orbit-breathe {
-  0%, 100% { transform: scale(1); opacity: .72; }
-  50% { transform: scale(1.04); opacity: 1; }
+@keyframes signal-out {
+  0%   { transform: scale(.25); opacity: 0; }
+  18%  { opacity: .5; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 button,
@@ -172,13 +225,24 @@ a {
   }
 
   .hero-grid,
-  .hero-orbit,
-  .hero-reveal {
+  .hero-reveal,
+  .signal-ring {
     animation: none !important;
   }
 
   .hero-reveal {
     opacity: 1;
     transform: none;
+  }
+
+  /* One static ring at rest, so the tower still reads as broadcasting. */
+  .signal-ring {
+    opacity: .18;
+    transform: scale(1.1);
+  }
+
+  .signal-ring:nth-child(2),
+  .signal-ring:nth-child(3) {
+    display: none;
   }
 }

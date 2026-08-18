@@ -47,7 +47,7 @@ export function EzStawShowcase() {
         className="pointer-events-none absolute -z-10 -right-24 bottom-0 h-72 w-72 rounded-full border border-ez-accent/20"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.72fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.72fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-28">
         <RevealGroup>
           <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
             <span className="h-px w-10 bg-ez-accent" aria-hidden="true" />
@@ -58,16 +58,16 @@ export function EzStawShowcase() {
 
           <motion.h2 data-motion=""
             variants={staggerItem}
-            className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
+            className="mt-5 max-w-3xl text-balance text-[clamp(2.25rem,7vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
           >
-            Your Store. <span className="text-ez-ink/45">Your Brand.</span> EzStaw.
+            EzStaw. A shop online in under a minute.
           </motion.h2>
           <motion.p data-motion=""
             variants={staggerItem}
             className="mt-5 max-w-xl text-base leading-7 text-ez-muted sm:text-lg sm:leading-8"
           >
-            Everything a merchant needs to sell online in Sierra Leone — no design skills, no card
-            required. Tell EzStaw what you sell and start taking orders the same day.
+            Everything a merchant needs to sell online in Sierra Leone. No design skills, no
+            card required. Tell EzStaw what you sell and start taking orders the same day.
           </motion.p>
 
           <motion.ul data-motion=""
@@ -117,10 +117,10 @@ export function EzStawShowcase() {
               className="absolute inset-x-[10%] bottom-[3%] h-[80%] rounded-full bg-ez-accent/20 blur-3xl"
             />
             <Image
-              src="/ezstaw-store.png"
+              src="/ezstaw-store.webp"
               alt="EzStaw storefront on a phone showing Zainab's Fashion with products, prices in Leones, and escrow-protected checkout"
-              width={508}
-              height={1643}
+              width={560}
+              height={1811}
               sizes="(max-width: 1023px) 55vw, 240px"
               className="relative block h-auto w-48 max-w-full object-contain drop-shadow-[0_2.5rem_4rem_rgb(61_30_10_/_0.28)] sm:w-56 lg:w-auto lg:max-w-none lg:max-h-[calc(100svh-15rem)]"
             />

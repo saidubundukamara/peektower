@@ -42,7 +42,7 @@ export function OpenJusticeShowcase() {
         className="pointer-events-none absolute -z-10 -left-24 bottom-10 h-72 w-72 rounded-full bg-oj-accent/10 blur-3xl"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
+      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-28">
         <Reveal className="order-2 lg:order-1">
           <Parallax distance={20}>
             <div className="relative rounded-2xl bg-oj-ink p-2 shadow-[0_2rem_5rem_rgb(16_37_31_/_0.2)] sm:p-3">
@@ -81,9 +81,9 @@ export function OpenJusticeShowcase() {
 
           <motion.h2 data-motion=""
             variants={staggerItem}
-            className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
+            className="mt-5 max-w-3xl text-balance text-[clamp(2.25rem,7vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
           >
-            OpenJustice. <span className="text-oj-ink/45">Justice records that work anywhere.</span>
+            OpenJustice. Records that keep working when the network doesn&apos;t.
           </motion.h2>
           <motion.p data-motion=""
             variants={staggerItem}

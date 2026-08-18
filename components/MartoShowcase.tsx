@@ -1,131 +1,180 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  BadgeCheck,
-  CarFront,
-  MapPinned,
-  WalletCards,
-} from "lucide-react";
-import { motion } from "motion/react";
 import Image from "next/image";
-import { Parallax, Reveal, RevealGroup, staggerItem } from "@/components/ui/motion";
+import { ArrowUpRight } from "lucide-react";
+import { motion, type Variants } from "motion/react";
+import { EASE_OUT_EXPO, Reveal, RevealGroup, staggerItem } from "@/components/ui/motion";
 
-const martoFeatures = [
-  {
-    title: "Know the fare upfront",
-    description: "See what your trip costs before you confirm.",
-    icon: WalletCards,
-  },
-  {
-    title: "Ride with confidence",
-    description: "Connect with verified drivers for everyday journeys.",
-    icon: BadgeCheck,
-  },
-  {
-    title: "Follow every trip",
-    description: "Live tracking keeps the route clear from pickup to arrival.",
-    icon: MapPinned,
-  },
-  {
-    title: "Ride or rent",
-    description: "Book a ride now or find a car for longer plans.",
-    icon: CarFront,
-  },
+/**
+ * A real sequence, so the route line encodes something.
+ *
+ * These were four parallel capabilities (fare / verified / tracking / rent)
+ * laid out as a 2x2 grid. Drawn on a line they would have asserted an order
+ * that did not exist. The product genuinely is a journey, so the copy now
+ * follows one and the markup is an <ol>. Every claim is unchanged.
+ */
+const stops = [
+  { title: "Say where you're going", body: "Open the app and set your destination." },
+  { title: "See the fare first", body: "The price is on screen before you confirm." },
+  { title: "Match with a verified driver", body: "Drivers are checked before they can pick up." },
+  { title: "Track it to the door", body: "Live tracking from pickup to arrival." },
 ] as const;
 
-const gridContainer = {
+const routeLine: Variants = {
+  hidden: { scaleX: 0 },
+  show: { scaleX: 1, transition: { duration: 1.1, ease: EASE_OUT_EXPO } },
+};
+
+const routeLineVertical: Variants = {
+  hidden: { scaleY: 0 },
+  show: { scaleY: 1, transition: { duration: 1.1, ease: EASE_OUT_EXPO } },
+};
+
+const stopsContainer: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.16, delayChildren: 0.22 } },
 };
 
 export function MartoShowcase() {
   return (
-    <section id="marto" className="relative isolate overflow-hidden bg-black text-white">
-      <Parallax
+    <section
+      id="marto"
+      aria-labelledby="marto-heading"
+      className="relative isolate overflow-hidden bg-brand-ink text-white"
+    >
+      {/*
+        The section ground is Freetown itself rather than a gradient. Scrimmed
+        hard toward --brand-ink so body copy still clears AA on top of it.
+      */}
+      <Image
+        src="/photos/freetown-road.webp"
+        alt=""
         aria-hidden="true"
-        distance={60}
-        className="absolute inset-y-0 right-0 -z-20 w-2/3 bg-[radial-gradient(circle_at_center,rgb(0_191_255_/_0.2),transparent_62%)]"
+        fill
+        priority={false}
+        sizes="100vw"
+        className="-z-30 object-cover object-center opacity-40"
       />
-      <div aria-hidden="true" className="hero-grid absolute inset-0 -z-30 opacity-20" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-20 bg-gradient-to-r from-brand-ink via-brand-ink/90 to-brand-ink/55"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-20 bg-gradient-to-t from-brand-ink via-transparent to-brand-ink/70"
+      />
 
-      <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-16 sm:px-10 sm:py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.72fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-8">
-        <RevealGroup>
-          <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
-            <span className="h-px w-10 bg-brand" aria-hidden="true" />
-            <p className="text-xs font-bold uppercase tracking-heading text-brand">
-              Flagship product
-            </p>
-          </motion.div>
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-10 sm:py-24 lg:px-12 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(15rem,0.62fr)] lg:items-center lg:gap-16">
+          <RevealGroup>
+            <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
+              <span className="h-px w-10 bg-brand" aria-hidden="true" />
+              <p className="text-xs font-bold uppercase tracking-heading text-brand">
+                Flagship product
+              </p>
+            </motion.div>
 
-          <motion.h2 data-motion=""
-            variants={staggerItem}
-            className="mt-5 max-w-3xl text-balance text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl"
-          >
-            Your Ride. <span className="text-white/45">Your Way.</span> Marto.
-          </motion.h2>
-          <motion.p data-motion=""
-            variants={staggerItem}
-            className="mt-5 max-w-xl text-base leading-7 text-white/65 sm:text-lg sm:leading-8"
-          >
-            One app for getting around Freetown — book a driver for today or a car for longer.
-            Every step is built to be obvious, not clever.
-          </motion.p>
+            <motion.h2
+              data-motion=""
+              id="marto-heading"
+              variants={staggerItem}
+              className="mt-6 max-w-xl text-balance text-[clamp(2.25rem,7vw,3.75rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
+            >
+              Marto. Know the fare before you get in.
+            </motion.h2>
 
-          <motion.ul data-motion=""
-            variants={gridContainer}
-            className="mt-8 grid gap-px overflow-hidden rounded-sm border border-white/15 bg-white/15 sm:grid-cols-2"
-          >
-            {martoFeatures.map((feature) => {
-              const Icon = feature.icon;
+            <motion.p
+              data-motion=""
+              variants={staggerItem}
+              className="mt-5 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8"
+            >
+              One app for getting around Freetown. Book a driver for today, or a car for
+              longer. Every step is built to be obvious, not clever.
+            </motion.p>
 
-              return (
-                <motion.li data-motion=""
-                  key={feature.title}
-                  variants={staggerItem}
-                  className="group bg-black/80 p-5 transition-colors duration-300 hover:bg-black/60"
+            <motion.ul
+              data-motion=""
+              variants={staggerItem}
+              className="mt-7 flex flex-wrap gap-2"
+              aria-label="Two ways to use Marto"
+            >
+              {["Book a ride now", "Rent a car for longer"].map((mode) => (
+                <li
+                  key={mode}
+                  className="rounded-full border border-white/25 px-4 py-1.5 text-sm text-white/80"
                 >
-                  <Icon
-                    className="text-brand transition-transform duration-300 group-hover:scale-110"
-                    size={24}
-                    strokeWidth={1.6}
-                    aria-hidden="true"
-                  />
-                  <h3 className="mt-5 font-semibold">{feature.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/55">{feature.description}</p>
-                </motion.li>
-              );
-            })}
-          </motion.ul>
+                  {mode}
+                </li>
+              ))}
+            </motion.ul>
 
-          <motion.a data-motion=""
-            variants={staggerItem}
-            href="https://getmarto.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-bold text-brand-ink transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-          >
-            Explore Marto
-            <ArrowUpRight size={18} aria-hidden="true" />
-          </motion.a>
+            <motion.a
+              data-motion=""
+              variants={staggerItem}
+              href="https://getmarto.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-9 inline-flex min-h-12 items-center gap-3 rounded-sm bg-brand px-6 py-3 text-sm font-bold text-brand-ink transition-[background-color,transform] duration-200 ease-out-expo hover:-translate-y-0.5 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+            >
+              Explore Marto
+              <ArrowUpRight size={18} aria-hidden="true" />
+            </motion.a>
+          </RevealGroup>
+
+          <Reveal className="flex justify-center lg:justify-end">
+            <div className="relative w-fit">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-6 top-10 -z-10 h-3/4 rounded-full bg-brand/25 blur-3xl"
+              />
+              <Image
+                src="/screen-rider-home.webp"
+                alt="Marto rider app home screen showing ride and car-rental options in Freetown"
+                width={640}
+                height={1314}
+                sizes="(max-width: 1023px) 60vw, 280px"
+                className="w-48 drop-shadow-[0_2.5rem_4rem_rgb(0_0_0_/_0.55)] sm:w-56 lg:w-[17rem]"
+              />
+            </div>
+          </Reveal>
+        </div>
+
+        {/*
+          Second band. No other section on the page has one, at any breakpoint,
+          which is what stops the three product sections reading as one template.
+        */}
+        <RevealGroup variants={stopsContainer} className="relative mt-20">
+          <motion.span
+            data-motion=""
+            aria-hidden="true"
+            variants={routeLineVertical}
+            className="absolute left-[7px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-brand to-brand/0 lg:hidden"
+          />
+          <motion.span
+            data-motion=""
+            aria-hidden="true"
+            variants={routeLine}
+            className="absolute inset-x-0 top-[7px] hidden h-px origin-left bg-gradient-to-r from-brand via-brand/60 to-brand/0 lg:block"
+          />
+
+          <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {stops.map((stop) => (
+              <motion.li
+                data-motion=""
+                key={stop.title}
+                variants={staggerItem}
+                className="relative pl-8 lg:pl-0 lg:pt-8"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-1 h-3.5 w-3.5 rounded-full border-2 border-brand bg-brand-ink lg:top-0"
+                />
+                <h3 className="text-base font-semibold">{stop.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/65">{stop.body}</p>
+              </motion.li>
+            ))}
+          </ol>
         </RevealGroup>
-
-        <Reveal className="flex justify-center lg:justify-end">
-          <Parallax distance={22} className="relative w-fit">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-[12%] bottom-[2%] h-[82%] rounded-full bg-brand/20 blur-3xl"
-            />
-            <Image
-              src="/screen-rider-home.png"
-              alt="Marto rider app home screen showing ride and car-rental options in Freetown"
-              width={1294}
-              height={2657}
-              sizes="(max-width: 1023px) 70vw, 300px"
-              className="relative block h-auto w-52 max-w-full object-contain drop-shadow-[0_2.5rem_4rem_rgb(0_0_0_/_0.55)] sm:w-60 lg:w-auto lg:max-w-none lg:max-h-[calc(100svh-15rem)]"
-            />
-          </Parallax>
-        </Reveal>
       </div>
     </section>
   );
