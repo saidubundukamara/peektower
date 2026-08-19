@@ -3,12 +3,10 @@
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
   type HTMLMotionProps,
   type Variants,
 } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
 // Shared easing — matches the CSS --ease-out-expo curve used elsewhere.
@@ -107,36 +105,6 @@ export function RevealGroup({ variants = staggerContainer, children, ...rest }: 
       initial="hidden"
       animate={isInView ? "show" : "hidden"}
       variants={variants}
-      {...rest}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-type ParallaxProps = HTMLMotionProps<"div"> & {
-  /** Total travel in px across the section's scroll pass (split ± around center). */
-  distance?: number;
-};
-
-/**
- * Scroll-linked parallax for decorative / visual layers only (never body copy).
- * Translates the element on the Y axis as its section scrolls through the
- * viewport. No-ops when the user prefers reduced motion.
- */
-export function Parallax({ distance = 40, style, children, ...rest }: ParallaxProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [distance, -distance]);
-
-  return (
-    <motion.div
-      ref={ref}
-      style={reduceMotion ? style : { ...style, y, willChange: "transform" }}
       {...rest}
     >
       {children}
