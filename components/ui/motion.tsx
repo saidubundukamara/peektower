@@ -8,7 +8,7 @@ import {
   type HTMLMotionProps,
   type Variants,
 } from "motion/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 
 // Shared easing — matches the CSS --ease-out-expo curve used elsewhere.
@@ -31,6 +31,44 @@ export const staggerItem: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_OUT_EXPO } },
 };
+
+/**
+ * Fires once when the element reaches the viewport, and reports whether the
+ * visitor asked for reduced motion.
+ *
+ * For sequences that are step machines rather than variant trees — where the
+ * thing being animated is a change of *state* (a connection dropping, records
+ * queueing) rather than a set of children arriving.
+ */
+export function useEnterOnce() {
+  const { elementRef, isInView } = useInView();
+  const reduced = useReducedMotion() ?? false;
+  return { ref: elementRef, started: isInView, reduced };
+}
+
+/**
+ * Walks through `timeline` (cumulative ms offsets) once, after `started`.
+ * Returns the current step index. Under reduced motion it lands on the final
+ * step immediately and runs no timers at all — the resting state is the point,
+ * the journey to it is the decoration.
+ *
+ * Never loops: an indefinite auto-playing animation mid-page is a distraction
+ * machine and fails WCAG 2.2.2.
+ */
+export function useTimeline(timeline: readonly number[], started: boolean, reduced: boolean) {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    if (!started || reduced) return;
+
+    const timers = timeline.map((at, i) => window.setTimeout(() => setStep(i + 1), at));
+    return () => timers.forEach(window.clearTimeout);
+  }, [started, reduced, timeline]);
+
+  // Derived rather than stored: under reduced motion there is no sequence to
+  // run, so the resting step is simply what this returns.
+  return reduced ? timeline.length : step;
+}
 
 type RevealProps = HTMLMotionProps<"div"> & { variants?: Variants };
 
