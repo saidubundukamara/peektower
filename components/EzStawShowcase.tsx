@@ -2,8 +2,8 @@
 
 import { ArrowUpRight, MessagesSquare, ShieldCheck, Sparkles, Wallet } from "lucide-react";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { Parallax, Reveal, RevealGroup, staggerItem } from "@/components/ui/motion";
+import { RevealGroup, staggerItem } from "@/components/ui/motion";
+import { EzStawStoreMock } from "@/components/showcase/EzStawStoreMock";
 
 const ezStawFeatures = [
   {
@@ -36,14 +36,12 @@ const listContainer = {
 export function EzStawShowcase() {
   return (
     <section id="ezstaw" className="relative isolate overflow-hidden bg-ez-surface text-ez-ink">
-      <Parallax
+      <div
         aria-hidden="true"
-        distance={70}
         className="pointer-events-none absolute -z-10 -left-32 -top-24 h-[32rem] w-[32rem] rounded-full bg-ez-accent/10 blur-3xl"
       />
-      <Parallax
+      <div
         aria-hidden="true"
-        distance={-50}
         className="pointer-events-none absolute -z-10 -right-24 bottom-0 h-72 w-72 rounded-full border border-ez-accent/20"
       />
 
@@ -110,29 +108,25 @@ export function EzStawShowcase() {
           </motion.a>
         </RevealGroup>
 
-        <Reveal className="flex justify-center lg:justify-end">
-          <Parallax distance={22} className="relative w-fit">
+        {/*
+          No Reveal wrapper: the mock runs its own entrance sequence, and
+          fading the whole thing in first would just delay the build.
+        */}
+        <div className="flex justify-center lg:justify-end">
+          <div className="relative w-fit">
             <div
               aria-hidden="true"
-              className="absolute inset-x-[10%] bottom-[3%] h-[80%] rounded-full bg-ez-accent/20 blur-3xl"
+              className="pointer-events-none absolute inset-x-[10%] bottom-[3%] -z-10 h-[80%] rounded-full bg-ez-accent/20 blur-3xl"
             />
-            <Image
-              src="/ezstaw-store.webp"
-              alt="EzStaw storefront on a phone showing Zainab's Fashion with products, prices in Leones, and escrow-protected checkout"
-              width={560}
-              height={1811}
-              sizes="(max-width: 1023px) 55vw, 240px"
-              className="relative block h-auto w-48 max-w-full object-contain drop-shadow-[0_2.5rem_4rem_rgb(61_30_10_/_0.28)] sm:w-56 lg:w-auto lg:max-w-none lg:max-h-[calc(100svh-15rem)]"
-            />
-            <div className="absolute -bottom-4 right-2 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-ez-ink shadow-xl sm:right-4">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ez-accent opacity-50 motion-reduce:animate-none" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-ez-accent" />
-              </span>
+
+            <EzStawStoreMock />
+
+            <p className="absolute -bottom-4 right-2 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-ez-ink shadow-xl sm:right-4">
+              <span className="inline-flex h-2 w-2 rounded-full bg-ez-accent" aria-hidden="true" />
               Live in 60s
-            </div>
-          </Parallax>
-        </Reveal>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
