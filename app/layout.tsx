@@ -18,9 +18,22 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  // The manifest existed but nothing referenced it, so it was inert.
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     type: "website",
-    locale: "en_SL",
+    // "en_SL" is not a valid Open Graph locale and was being dropped.
+    locale: "en_GB",
     url: "/",
     siteName: "PeekTower",
     title: "PeekTower | Digital Products Built in Sierra Leone",
@@ -28,10 +41,11 @@ export const metadata: Metadata = {
       "A Freetown technology company building practical web and mobile products for Sierra Leone and beyond.",
     images: [
       {
-        url: "/logo/peektower-black.png",
-        width: 1920,
-        height: 1080,
-        alt: "PeekTower Company Limited",
+        url: "/og/peektower-og.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: "PeekTower — building practical digital products from Sierra Leone",
       },
     ],
   },
@@ -40,7 +54,7 @@ export const metadata: Metadata = {
     title: "PeekTower | Digital Products Built in Sierra Leone",
     description:
       "A Freetown technology company building practical web and mobile products for Sierra Leone and beyond.",
-    images: ["/logo/peektower-black.png"],
+    images: ["/og/peektower-og.png"],
   },
   robots: {
     index: true,
