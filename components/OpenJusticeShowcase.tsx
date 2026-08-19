@@ -2,8 +2,8 @@
 
 import { ArrowUpRight, CloudOff, Code2, Landmark, RadioTower } from "lucide-react";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { Parallax, Reveal, RevealGroup, staggerItem } from "@/components/ui/motion";
+import { RevealGroup, staggerItem } from "@/components/ui/motion";
+import { OpenJusticeDashboardMock } from "@/components/showcase/OpenJusticeDashboardMock";
 
 const openJusticeFeatures = [
   {
@@ -31,45 +31,25 @@ const listContainer = {
 export function OpenJusticeShowcase() {
   return (
     <section id="openjustice" className="relative isolate overflow-hidden bg-oj-surface text-oj-ink">
-      <Parallax
+      <div
         aria-hidden="true"
-        distance={-60}
         className="pointer-events-none absolute -z-10 -right-32 -top-32 h-[34rem] w-[34rem] rounded-full border border-oj-accent/20"
       />
-      <Parallax
+      <div
         aria-hidden="true"
-        distance={70}
         className="pointer-events-none absolute -z-10 -left-24 bottom-10 h-72 w-72 rounded-full bg-oj-accent/10 blur-3xl"
       />
 
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 py-20 sm:px-10 sm:py-24 lg:grid-cols-[minmax(19rem,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-16 lg:px-12 lg:py-28">
-        <Reveal className="order-2 lg:order-1">
-          <Parallax distance={20}>
-            <div className="relative rounded-2xl bg-oj-ink p-2 shadow-[0_2rem_5rem_rgb(16_37_31_/_0.2)] sm:p-3">
-              <div className="flex items-center gap-2 px-2 pb-3 pt-1" aria-hidden="true">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-                <span className="ml-3 h-5 flex-1 rounded-full bg-white/8" />
-              </div>
-              <Image
-                src="/openjustice-dashboard.png"
-                alt="OpenJustice criminal records dashboard with case statistics and navigation"
-                width={590}
-                height={340}
-                sizes="(max-width: 1023px) 100vw, 520px"
-                className="h-auto w-full rounded-lg"
-              />
-              <div className="absolute -bottom-5 right-5 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-xs font-bold shadow-xl sm:right-8">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-oj-accent opacity-50 motion-reduce:animate-none" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-oj-accent-strong" />
-                </span>
-                Works offline
-              </div>
-            </div>
-          </Parallax>
-        </Reveal>
+        {/*
+          No Reveal wrapper and no Parallax: the mock runs its own sequence, and
+          scroll-linked drift on top of a state machine reads as two unrelated
+          things moving at once. The "Works offline" pill is gone too — the
+          dashboard now demonstrates that rather than labelling it.
+        */}
+        <div className="order-2 lg:order-1">
+          <OpenJusticeDashboardMock />
+        </div>
 
         <RevealGroup className="order-1 lg:order-2">
           <motion.div data-motion="" variants={staggerItem} className="flex items-center gap-4">
