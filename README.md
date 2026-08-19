@@ -44,8 +44,31 @@ npx serve out
 
 No server runtime, API routes, database, or environment variables are required.
 
+## Brand assets
+
+Generated into `public/` from one drawing — the tower mark in
+`components/TowerMark.tsx`, whose geometry the favicons and social images share.
+
+| Asset | Path | Use |
+|---|---|---|
+| Square logo, 400x400 | `public/brand/linkedin-logo-400.png` | LinkedIn company page avatar |
+| Cover, 1128x191 | `public/brand/linkedin-cover-1128x191.png` | LinkedIn company page banner |
+| Social card, 1200x630 | `public/og/peektower-og.png` | Open Graph / Twitter previews |
+
+Rebuild them with `python3 /tmp/build_brand.py` style composition via Pillow;
+there is no ImageMagick dependency.
+
+## Photography
+
+`public/photos/` holds two Unsplash photographs of Freetown, used under the
+Unsplash License. See `public/photos/CREDITS.md`. Only photographs actually
+taken in Sierra Leone are used.
+
 ## Content still awaiting confirmation
 
 - Founder titles and optional headshots
-- Business WhatsApp number
-- Social media URLs
+- Business WhatsApp number. Until one exists, `data/contact.ts` keeps
+  `whatsappHref: null` and the row renders as plain text rather than linking to
+  a number that is not ours.
+- Social media URLs. `socialLinks` entries with a `null` href are not rendered
+  at all; add a URL and the link appears in both Contact and the footer.

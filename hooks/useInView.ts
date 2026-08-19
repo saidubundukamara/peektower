@@ -24,7 +24,11 @@ export function useInView() {
         setIsInView(true);
         observer.unobserve(entry.target);
       },
-      { rootMargin: "0px 0px -10%", threshold: 0.12 },
+      // Fire slightly *before* the element enters, and on any sliver of it. The
+      // old "-10% / 0.12" pair needed 12% of a tall section visible past a
+      // shrunk root, so a fast scroll could land inside a section that had not
+      // revealed yet and show it blank.
+      { rootMargin: "0px 0px 15%", threshold: 0 },
     );
 
     observer.observe(element);
