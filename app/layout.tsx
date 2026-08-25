@@ -77,7 +77,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`no-js ${manrope.variable} h-full antialiased`}>
+    /*
+      suppressHydrationWarning is scoped to this element's own attributes, and
+      it is here for one specific, deliberate mismatch: `no-js` ships in the
+      server HTML and the inline script below removes it during parse, so by the
+      time React hydrates the class is legitimately gone.
+
+      The class cannot simply be dropped. Framer serialises `initial="hidden"`
+      into the static HTML as an inline `opacity: 0`, and a class present at
+      parse time is the only hook that can override an inline style before any
+      JavaScript runs — which is what keeps the page readable with JS disabled
+      or when the chunk never arrives. Mutating it is the mechanism, not a bug.
+    */
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`no-js ${manrope.variable} h-full antialiased`}
+    >
       <body className="min-h-full bg-background text-foreground">
         {/*
           Runs during parse, before any [data-motion] element exists, so there is
