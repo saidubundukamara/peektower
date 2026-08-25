@@ -35,7 +35,11 @@ const listContainer = {
 
 export function EzStawShowcase() {
   return (
-    <section id="ezstaw" className="relative isolate overflow-hidden bg-ez-surface text-ez-ink">
+    <section
+      id="ezstaw"
+      data-cam="4"
+      className="relative isolate overflow-hidden bg-ez-surface text-ez-ink"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -z-10 -left-32 -top-24 h-[32rem] w-[32rem] rounded-full bg-ez-accent/10 blur-3xl"

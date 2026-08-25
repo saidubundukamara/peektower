@@ -2,6 +2,7 @@ import Image from "next/image";
 import { navItems } from "@/data/nav";
 import { socialLinks, type SocialLink } from "@/data/contact";
 import { siteContent } from "@/data/site";
+import { WorldAperture } from "@/components/ui/WorldAperture";
 
 // The three product sections are consecutive on the page but only reachable
 // from the nav as one "Products" link. The footer is where the deep links live.
@@ -24,8 +25,25 @@ const columnLabel = "text-sm font-semibold text-white";
 
 export function Footer() {
   return (
-    <footer className="bg-brand-ink text-white">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start md:gap-16 lg:px-12">
+    <footer data-cam="7" className="relative isolate text-white">
+      <div data-ground className="bg-brand-ink" aria-hidden="true" />
+
+      {/*
+        The end of the climb. Everything above this is the structure seen from
+        the ground or from across the water; this is the view from the top of
+        it, and it is the one place the reader gets to look out rather than up.
+      */}
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-14 sm:px-10 lg:px-12">
+        <WorldAperture
+          frame="summit"
+          ratio="21 / 7"
+          tone="dark"
+          caption="From the top of the mast, looking out over the peninsula."
+          meta="Live"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-10 px-6 py-14 sm:px-10 md:grid-cols-[1fr_auto] md:items-start md:gap-16 lg:px-12">
         <div>
           <a
             href="#main-content"

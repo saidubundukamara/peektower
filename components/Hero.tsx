@@ -2,10 +2,14 @@ import { ArrowDownRight } from "lucide-react";
 import { siteContent } from "@/data/site";
 import { PlasmaBackground } from "@/components/PlasmaBackground";
 import { TowerMark } from "@/components/TowerMark";
+import { RevealWords } from "@/components/ui/motion";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-svh items-end overflow-hidden bg-brand-ink text-white">
+    <section
+      data-cam="0"
+      className="hero-shell relative isolate flex min-h-svh items-end overflow-hidden bg-brand-ink text-white"
+    >
       <div aria-hidden="true" className="hero-grid absolute inset-0 -z-20 opacity-20" />
 
       {/*
@@ -36,10 +40,19 @@ export function Hero() {
           </p>
         </div>
 
-        <h1 className="hero-reveal hero-reveal-2 mt-7 max-w-5xl text-balance text-[clamp(2.75rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.055em]">
-          Building practical digital products{" "}
-          <span className="text-white/55">from Sierra Leone.</span>
-        </h1>
+        {/*
+          The headline arrives a word at a time rather than as one block. It is
+          the only display heading in the first viewport, so it can carry the
+          slower entrance without competing with anything.
+        */}
+        <RevealWords
+          as="h1"
+          className="mt-7 max-w-5xl text-balance text-[clamp(2.75rem,8vw,7.5rem)] font-semibold leading-[0.95] tracking-[-0.055em]"
+          segments={[
+            { text: "Building practical digital products" },
+            { text: "from Sierra Leone.", className: "text-white/55" },
+          ]}
+        />
 
         <div className="hero-reveal hero-reveal-3 mt-10 grid gap-8 border-t border-white/15 pt-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <p className="max-w-2xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">

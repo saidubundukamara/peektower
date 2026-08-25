@@ -1,4 +1,5 @@
 import { services } from "@/data/services";
+import { RevealWords } from "@/components/ui/motion";
 
 /**
  * A typographic index, not a card grid.
@@ -11,14 +12,19 @@ import { services } from "@/data/services";
  */
 export function Services() {
   return (
-    <section id="services" aria-labelledby="services-heading" className="bg-surface">
+    <section
+      id="services"
+      data-cam="2"
+      aria-labelledby="services-heading"
+      className="bg-surface"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 py-24 sm:px-10 sm:py-32 lg:px-12 lg:py-40">
-        <h2
+        <RevealWords
+          as="h2"
           id="services-heading"
           className="max-w-2xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl"
-        >
-          What we build.
-        </h2>
+          text="What we build."
+        />
 
         <ul className="mt-16 border-t border-black/12">
           {services.map((service) => (

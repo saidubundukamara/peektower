@@ -38,6 +38,7 @@ const stopsContainer: Variants = {
 export function MartoShowcase() {
   return (
     <section
+      data-cam="3"
       id="marto"
       aria-labelledby="marto-heading"
       className="relative isolate overflow-hidden bg-brand-ink text-white"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { resolveTier } from "@/components/world/tier";
 
 const vertex = /* glsl */ `
   attribute vec2 position;
@@ -81,6 +82,12 @@ export function PlasmaBackground() {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    // This shader is now the constrained tier of the tower world: it runs where
+    // three would be too much to ask for, and nowhere else. Anything richer gets
+    // the modelled scene instead, and anything poorer keeps the CSS rings — so
+    // in both of those cases ogl is never fetched either.
+    if (resolveTier() !== "constrained") return;
 
     let cancelled = false;
     let teardown: (() => void) | undefined;

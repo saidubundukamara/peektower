@@ -1,5 +1,7 @@
 import { ArrowUpRight, Mail, MapPin, MessageCircle } from "lucide-react";
 import { contactDetails, socialLinks, type SocialLink } from "@/data/contact";
+import { RevealWords } from "@/components/ui/motion";
+import { WorldAperture } from "@/components/ui/WorldAperture";
 
 const contactMethods = [
   {
@@ -29,21 +31,24 @@ export function Contact() {
   return (
     <section
       id="contact"
+      data-cam="6"
       aria-labelledby="contact-heading"
-      className="relative isolate overflow-hidden bg-surface"
+      className="relative isolate"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-52 -right-40 -z-10 h-[34rem] w-[34rem] rounded-full border border-brand/20"
-      />
-      <div className="mx-auto grid w-full max-w-6xl gap-14 px-6 py-24 sm:px-10 sm:py-32 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.85fr)] md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:gap-20 lg:px-12 lg:py-40">
+      {/*
+        The outlined circle that used to sit in this corner was standing in for
+        the signal. The aperture below shows the thing itself, so the stand-in
+        has gone.
+      */}
+      <div data-ground className="bg-surface" aria-hidden="true" />
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-14 px-6 py-24 sm:px-10 sm:py-32 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.85fr)] md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:gap-20 lg:px-12 lg:py-40">
         <div>
-          <h2
+          <RevealWords
+            as="h2"
             id="contact-heading"
             className="max-w-3xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.035em] sm:text-6xl"
-          >
-            Tell us what you&apos;re building.
-          </h2>
+            text="Tell us what you're building."
+          />
           <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
             We&apos;ll tell you honestly whether we can help.
           </p>
@@ -52,6 +57,14 @@ export function Contact() {
             <MapPin className="shrink-0 text-brand-text" size={22} aria-hidden="true" />
             <span>{contactDetails.location}</span>
           </div>
+
+          <WorldAperture
+            className="mt-12 max-w-md"
+            frame="beacon"
+            ratio="3 / 2"
+            caption="The crossbar, where the signal leaves the structure."
+            meta="Live"
+          />
         </div>
 
         <div className="flex flex-col justify-end">

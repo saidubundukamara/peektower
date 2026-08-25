@@ -30,7 +30,11 @@ const listContainer = {
 
 export function OpenJusticeShowcase() {
   return (
-    <section id="openjustice" className="relative isolate overflow-hidden bg-oj-surface text-oj-ink">
+    <section
+      id="openjustice"
+      data-cam="5"
+      className="relative isolate overflow-hidden bg-oj-surface text-oj-ink"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -z-10 -right-32 -top-32 h-[34rem] w-[34rem] rounded-full border border-oj-accent/20"

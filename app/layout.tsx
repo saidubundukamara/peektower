@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { MotionProvider } from "@/components/ui/MotionProvider";
+import { PeekTowerWorld } from "@/components/world/PeekTowerWorld";
 import { Nav } from "@/components/Nav";
 import "./globals.css";
 
@@ -95,6 +96,12 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        {/*
+          One canvas for the whole document, behind every section. It resolves
+          what this device should get before it fetches a renderer, so a visitor
+          on a metered connection never downloads one.
+        */}
+        <PeekTowerWorld />
         <MotionProvider>
           <Nav />
           {children}
