@@ -246,3 +246,165 @@ a {
     display: none;
   }
 }
+
+/* ============================================================ the world
+   One fixed canvas for the whole document, sitting behind the page. It is only
+   ever seen where the page opens a hole: the hero, which goes transparent, and
+   the two apertures, which cut their section's ground.
+
+   The root background has to go with it — a background on html or body
+   propagates to the viewport canvas and paints in front of any negative
+   z-index element, which would hide this entirely. Every section carries its
+   own ground, so nothing is lost by dropping it.
+*/
+.world-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.world-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+html[data-world="live"] body {
+  background: transparent;
+}
+
+/* The hero's ground is the scene itself once it is running. */
+html[data-world="live"] .hero-shell {
+  background-color: transparent;
+}
+
+/*
+  Three things in the hero are the flat version of what the world now draws:
+  the shader, the CSS rings, and the SVG mark. Showing any of them alongside a
+  modelled tower puts two towers in one frame.
+*/
+html[data-world="live"] .signal-field,
+html[data-world="live"] .signal-tower,
+html[data-world="live"] .hero-plasma {
+  display: none;
+}
+
+html[data-world="live"] .hero-grid {
+  opacity: 0.08;
+}
+
+/* ---------------------------------------------------------- the apertures
+   A section that holds an aperture paints its ground on a child rather than on
+   itself, so the ground can be cut. The cut is a second mask layer subtracted
+   from the first; `apertures.ts` writes its rectangle on every scroll and
+   resize. With no aperture running the rectangle is 0x0 and subtracts nothing,
+   so this is inert until the world is actually live.
+*/
+/*
+  A ground is positioned, so it paints after its non-positioned siblings — any
+  content that is not itself positioned ends up behind it. Rather than rely on
+  every child remembering a z-index, lift them here, scoped to the sections that
+  actually carry a ground so nothing else has its stacking changed.
+*/
+:is(section, footer):has(> [data-ground]) > *:not([data-ground]) {
+  position: relative;
+  z-index: 1;
+}
+
+[data-ground] {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-size: 100% 100%, var(--hole-w, 0px) var(--hole-h, 0px);
+  mask-size: 100% 100%, var(--hole-w, 0px) var(--hole-h, 0px);
+  -webkit-mask-position: 0 0, var(--hole-x, 0px) var(--hole-y, 0px);
+  mask-position: 0 0, var(--hole-x, 0px) var(--hole-y, 0px);
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.aperture {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 0.125rem;
+}
+
+.aperture[data-tone="dark"] {
+  border-color: rgb(255 255 255 / 0.15);
+}
+
+/*
+  The still that stands in until — or instead of — the live view. It is removed
+  from the flow only once an aperture reports itself running, so a browser with
+  no WebGL never shows an empty frame.
+*/
+.aperture[data-frame-live="true"] .aperture-fallback {
+  opacity: 0;
+}
+
+.aperture-fallback {
+  transition: opacity var(--duration-slow) var(--ease-out-expo);
+}
+
+/* Only true once the live view is running; the caption sits next to the frame,
+   so the running frame can reveal it directly. */
+.aperture-meta {
+  visibility: hidden;
+}
+
+.aperture[data-frame-live="true"] ~ figcaption .aperture-meta {
+  visibility: visible;
+}
+
+/* --------------------------------------------------------- word reveals
+   Display headings arrive a word at a time. The original text stays as the
+   accessible label; these spans are presentational.
+*/
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 108%, 0);
+  transition:
+    transform 0.82s var(--ease-out-expo),
+    opacity 0.5s var(--ease-out-expo);
+  transition-delay: var(--word-delay, 0ms);
+}
+
+.word-reveal-in .word {
+  opacity: 1;
+  transform: none;
+}
+
+/*
+  `.word` sets its own opacity, so the `.no-js [data-motion]` rule above cannot
+  reach it — without this the headings are blank with JavaScript disabled.
+*/
+.no-js .word {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .aperture-fallback {
+    transition: none;
+  }
+}

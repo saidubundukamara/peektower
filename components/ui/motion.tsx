@@ -6,7 +6,14 @@ import {
   type HTMLMotionProps,
   type Variants,
 } from "motion/react";
-import { useEffect, useState } from "react";
+import {
+  createElement,
+  useEffect,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+  type Ref,
+} from "react";
 import { useInView } from "@/hooks/useInView";
 
 // Shared easing — matches the CSS --ease-out-expo curve used elsewhere.
@@ -109,5 +116,80 @@ export function RevealGroup({ variants = staggerContainer, children, ...rest }: 
     >
       {children}
     </motion.div>
+  );
+}
+
+/** One run of words in a display heading, optionally styled differently. */
+export type WordSegment = { text: string; className?: string };
+
+type RevealWordsProps = {
+  as?: "h1" | "h2" | "h3" | "p";
+  /** Plain heading text. Use `segments` instead when part of it is styled. */
+  text?: string;
+  segments?: readonly WordSegment[];
+  className?: string;
+  id?: string;
+  /** Gap between successive words, in ms. */
+  wordDelay?: number;
+};
+
+/**
+ * A display heading that arrives one word at a time.
+ *
+ * The words are masked and presentational; the whole phrase stays on the
+ * element as its accessible name, so nothing about the heading changes for a
+ * screen reader. The trigger is the project's own IntersectionObserver, which
+ * already resolves to "in view" immediately under reduced motion — so the
+ * resting state costs nothing and needs no separate branch here.
+ *
+ * Transitions rather than Framer variants: a long headline is twenty-odd
+ * elements, and this only ever animates two properties on each.
+ */
+export function RevealWords({
+  as = "h2",
+  text,
+  segments,
+  className,
+  id,
+  wordDelay = 72,
+}: RevealWordsProps) {
+  const { elementRef, isInView } = useInView();
+  const runs = segments ?? (text ? [{ text }] : []);
+
+  let index = 0;
+  const children: ReactNode[] = [];
+
+  runs.forEach((run, runIndex) => {
+    run.text
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach((word, wordIndex) => {
+        // A real space between the masks: they are inline-block, so without a
+        // text node here the words run together.
+        if (index > 0) children.push(" ");
+        children.push(
+          <span className="word-mask" aria-hidden="true" key={`${runIndex}-${wordIndex}`}>
+            <span
+              className={run.className ? `word ${run.className}` : "word"}
+              style={{ "--word-delay": `${index * wordDelay}ms` } as CSSProperties}
+            >
+              {word}
+            </span>
+          </span>,
+        );
+        index++;
+      });
+  });
+
+  return createElement(
+    as,
+    {
+      id,
+      ref: elementRef as unknown as Ref<HTMLHeadingElement>,
+      "data-motion": "",
+      "aria-label": runs.map((r) => r.text).join(" "),
+      className: isInView ? `${className ?? ""} word-reveal-in`.trim() : className,
+    },
+    children,
   );
 }
